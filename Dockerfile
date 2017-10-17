@@ -36,3 +36,9 @@ RUN apt-get update -y && \
     apt-get install openjdk-8-jdk -y
 
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
+
+RUN set -x && \
+  rm -rf /usr/lib/jvm/java-7-openjdk-amd64/ && \
+  update-alternatives --install /usr/bin/java java $JAVA_HOME/bin/java 10000 && \
+  update-alternatives --install /usr/bin/javac javac $JAVA_HOME/bin/javac 10000 && \
+  mvn -v
